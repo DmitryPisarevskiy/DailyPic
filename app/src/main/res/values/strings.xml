@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Daily Pic</string>
+    <string name="search_wiki">Искать в википедии</string>
+    <string name="wiki_helper_text">Поищите термин в википедии</string>
+    <string name="photo_of_the_day_stub">Фото дня</string>
 </resources>

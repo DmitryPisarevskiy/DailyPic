@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import coil.api.load
 import com.example.dailypic.R
+import com.example.dailypic.databinding.PictureFragmentBinding
 import com.example.dailypic.viewmodel.picture.PictureData
 import com.example.dailypic.viewmodel.picture.PictureViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -26,20 +28,21 @@ class PictureFragment : Fragment() {
     private val viewModel: PictureViewModel by lazy {
         ViewModelProvider(this).get(PictureViewModel::class.java)
     }
+    lateinit var vb: PictureFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.picture_fragment, container, false)
-    }
+    ) = PictureFragmentBinding.inflate(inflater, container, false).also {
+        vb = it
+    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getData()
             .observe(viewLifecycleOwner, Observer<PictureData> { renderData(it) })
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
-        view.findViewById<TextInputLayout>(R.id.input_layout).setEndIconOnClickListener {
+        vb.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(
                     "https://en.wikipedia.org/wiki/${
@@ -80,11 +83,13 @@ class PictureFragment : Fragment() {
                     toast("Link is empty")
                 } else {
                     //showSuccess()
-                    view!!.findViewById<ImageView>(R.id.image_view).load(url) {
+                    view!!.findViewById<ImageView>(R.id.top_picture).load(url) {
                         lifecycle(this@PictureFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_foreground)
                     }
+                    view!!.findViewById<TextView>(R.id.bottom_sheet_description).text = serverResponseData.explanation
+                    view!!.findViewById<TextView>(R.id.bottom_sheet_description_header).text = serverResponseData.title
                 }
             }
             is PictureData.Loading -> {
@@ -99,22 +104,22 @@ class PictureFragment : Fragment() {
 
     private fun setBottomAppBar(view: View) {
         val context = activity as MainActivity
-        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+        context.setSupportActionBar(vb.bottomAppBar)
         setHasOptionsMenu(true)
-        fab.setOnClickListener {
+        vb.fab.setOnClickListener {
             if (isMain) {
                 isMain = false
-                bottom_app_bar.navigationIcon = null
-                bottom_app_bar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
-                bottom_app_bar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+                vb.bottomAppBar.navigationIcon = null
+                vb.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
+                vb.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
             } else {
                 isMain = true
-                bottom_app_bar.navigationIcon =
+                vb.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
-                bottom_app_bar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
-                bottom_app_bar.replaceMenu(R.menu.menu_bottom_bar)
+                vb.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
+                vb.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
         }
     }

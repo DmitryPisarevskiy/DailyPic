@@ -9,6 +9,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+const val apiKey: String = "OJUh9f1hibYtGedcgk2OUFSIQbY1Rb99D3CTiSf3"
+
 class PictureViewModel (
     private val liveData: MutableLiveData<PictureData> = MutableLiveData(),
     private val retrofitImpl: PictureRetrofitImpl = PictureRetrofitImpl()
@@ -22,7 +24,6 @@ class PictureViewModel (
 
         private fun sendServerRequest() {
             liveData.value = PictureData.Loading(null)
-            val apiKey: String = "OJUh9f1hibYtGedcgk2OUFSIQbY1Rb99D3CTiSf3"
             if (apiKey.isBlank()) {
                 PictureData.Error(Throwable("You need API key"))
             } else {

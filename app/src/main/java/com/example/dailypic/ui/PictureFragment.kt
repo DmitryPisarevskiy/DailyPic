@@ -42,7 +42,7 @@ class PictureFragment : Fragment() {
         viewModel.getData()
             .observe(viewLifecycleOwner, Observer<PictureData> { renderData(it) })
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
-        vb.inputLayout.setEndIconOnClickListener {
+        view.findViewById<TextInputLayout>(R.id.input_layout).setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(
                     "https://en.wikipedia.org/wiki/${
@@ -68,6 +68,14 @@ class PictureFragment : Fragment() {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
                 }
+            }
+            R.id.app_bar_search -> {
+                if (bottomSheetBehavior.state ==BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state ==BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                } else {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                }
+
             }
         }
         return super.onOptionsItemSelected(item)
@@ -126,7 +134,7 @@ class PictureFragment : Fragment() {
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     private fun Fragment.toast(string: String?) {

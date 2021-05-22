@@ -8,4 +8,11 @@
     <string name="search">Поиск</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_theme">Выберите тему оформления</string>
+    <string name="black">Black</string>
+    <string name="white">White</string>
+    <string name="gray">Gray</string>
+    <string name="blue">Голубая</string>
+    <string name="pink">Розовая</string>
+    <string name="violet">Фиолетовая</string>
 </resources>

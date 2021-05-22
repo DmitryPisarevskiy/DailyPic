@@ -118,14 +118,12 @@ class PictureFragment : Fragment() {
             if (isMain) {
                 isMain = false
                 vb.bottomAppBar.navigationIcon = null
-                vb.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                 vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
                 vb.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
             } else {
                 isMain = true
                 vb.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
-                vb.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
                 vb.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }

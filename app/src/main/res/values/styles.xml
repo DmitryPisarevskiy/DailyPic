@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DarkChip" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+    <style name="LightChip" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+</resources>

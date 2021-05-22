@@ -56,6 +56,7 @@
             app:chipBackgroundColor="@color/color_pink"
             android:text="@string/pink" />
 
+
         <com.google.android.material.chip.Chip
             style="@style/DarkChip"
             android:layout_width="wrap_content"

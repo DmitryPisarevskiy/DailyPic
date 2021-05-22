@@ -21,10 +21,10 @@
     <style name="Theme.DailyPic.Black">
         <item name="colorPrimary">@color/color_black</item>
         <item name="colorPrimaryDark">@color/color_dark_gray</item>
-        <item name="colorAccent">@color/color_light_gray</item>
+        <item name="colorAccent">@color/color_blue</item>
     </style>
 
-    <style name="Theme.DailyPic.Green">
+    <style name="Theme.DailyPic.Gray">
         <item name="colorPrimary">@color/color_gray</item>
         <item name="colorPrimaryDark">@color/color_dark_gray</item>
         <item name="colorAccent">@color/color_black</item>
@@ -39,12 +39,12 @@
     <style name="Theme.DailyPic.Pink">
         <item name="colorPrimary">@color/color_pink</item>
         <item name="colorPrimaryDark">@color/color_dark_pink</item>
-        <item name="colorAccent">@color/color_blue</item>
+        <item name="colorAccent">@color/color_violet</item>
     </style>
 
     <style name="Theme.DailyPic.Violet">
         <item name="colorPrimary">@color/color_violet</item>
         <item name="colorPrimaryDark">@color/color_dark_violet</item>
-        <item name="colorAccent">@color/color_blue</item>
+        <item name="colorAccent">@color/color_pink</item>
     </style>
 </resources>

@@ -8,6 +8,7 @@ import com.example.dailypic.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(ThemeHolder.theme)
         setContentView(R.layout.activity_main)
         if (savedInstanceState==null) {
             supportFragmentManager.beginTransaction()
@@ -15,4 +16,8 @@ class MainActivity : AppCompatActivity() {
                     .commitNow()
         }
     }
+}
+
+object ThemeHolder {
+    var theme = R.style.Theme_DailyPic
 }

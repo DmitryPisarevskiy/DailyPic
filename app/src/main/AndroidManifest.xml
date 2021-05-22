@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_picto_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DailyPic">
+        android:theme="@style/Theme.DailyPic.Violet">
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

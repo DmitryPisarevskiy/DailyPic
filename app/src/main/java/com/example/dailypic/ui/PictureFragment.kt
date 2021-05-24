@@ -17,7 +17,6 @@ import com.example.dailypic.R
 import com.example.dailypic.databinding.PictureFragmentBinding
 import com.example.dailypic.viewmodel.picture.PictureData
 import com.example.dailypic.viewmodel.picture.PictureViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -56,7 +55,7 @@ class PictureFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_bottom_bar, menu)
+        inflater.inflate(R.menu.menu_bottom_navigation_view, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -125,7 +124,7 @@ class PictureFragment : Fragment() {
                 vb.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                 vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
-                vb.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+                vb.bottomAppBar.replaceMenu(R.menu.menu_bottom_navigation_view)
             }
         }
     }

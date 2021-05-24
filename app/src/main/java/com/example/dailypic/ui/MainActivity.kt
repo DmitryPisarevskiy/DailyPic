@@ -3,19 +3,51 @@ package com.example.dailypic.ui
 //OJUh9f1hibYtGedcgk2OUFSIQbY1Rb99D3CTiSf3
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import com.example.dailypic.R
+import com.example.dailypic.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var vb:ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeHolder.theme)
-        setContentView(R.layout.activity_main)
+        vb= ActivityMainBinding.inflate(layoutInflater)
+        setContentView(vb.root)
         if (savedInstanceState==null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, PictureFragment.newInstance())
-                    .commitNow()
+                .replace(R.id.container, PictureFragment.newInstance())
+                .commitNow()
         }
+        vb.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.app_bar_search -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, PictureFragment())
+                        .commit()
+                }
+                R.id.app_bar_fav -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, PictureFragment())
+                        .commit()
+                }
+                R.id.app_bar_settings -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, PictureFragment())
+                        .commit()
+                }
+                else -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, PictureFragment())
+                        .commit()
+                }
+            }
+            return@setOnNavigationItemSelectedListener true
+        }
+
     }
+
 }
 
 object ThemeHolder {

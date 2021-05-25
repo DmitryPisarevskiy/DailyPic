@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import coil.api.load
 import com.example.dailypic.R
@@ -50,15 +49,15 @@ class PictureFragment : Fragment() {
                 )
             })
         }
-        setBottomAppBar(view)
+        setAppBar(view)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_topbar, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        inflater.inflate(R.menu.menu_top_navigation, menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        when (item.itemId) {
 //            R.id.app_bar_fav -> toast("Favourite")
 //            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
@@ -69,7 +68,7 @@ class PictureFragment : Fragment() {
 //                }
 //            }
 //            R.id.app_bar_search -> {
-//                if (bottomSheetBehavior.state ==BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state ==BottomSheetBehavior.STATE_COLLAPSED) {
+//                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
 //                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 //                } else {
 //                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -77,8 +76,8 @@ class PictureFragment : Fragment() {
 //
 //            }
 //        }
-        return super.onOptionsItemSelected(item)
-    }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     private fun renderData(data: PictureData) {
         when (data) {
@@ -95,8 +94,10 @@ class PictureFragment : Fragment() {
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_foreground)
                     }
-                    view!!.findViewById<TextView>(R.id.bottom_sheet_description).text = serverResponseData.explanation
-                    view!!.findViewById<TextView>(R.id.bottom_sheet_description_header).text = serverResponseData.title
+                    view!!.findViewById<TextView>(R.id.bottom_sheet_description).text =
+                        serverResponseData.explanation
+                    view!!.findViewById<TextView>(R.id.bottom_sheet_description_header).text =
+                        serverResponseData.title
                 }
             }
             is PictureData.Loading -> {
@@ -109,10 +110,40 @@ class PictureFragment : Fragment() {
         }
     }
 
-    private fun setBottomAppBar(view: View) {
+    private fun setAppBar(view: View) {
         val context = activity as MainActivity
         context.setSupportActionBar(vb.topAppBar)
         setHasOptionsMenu(true)
+        vb.topAppBar.setNavigationOnClickListener {
+            activity?.let {
+                BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+            }
+        }
+        vb.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.app_bar_fav -> {
+                    toast("Favourite")
+                    true
+                }
+                R.id.app_bar_settings -> {
+                    requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .add(R.id.container, ChipsFragment())
+                        .addToBackStack(null)
+                        .commit()
+                    true
+                }
+                R.id.app_bar_search -> {
+                    if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    } else {
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    }
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
 

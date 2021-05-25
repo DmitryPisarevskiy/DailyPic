@@ -8,7 +8,7 @@
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="top"
         android:layout_marginStart="@dimen/single_common_margin"
         android:layout_marginTop="@dimen/single_common_margin"
         android:layout_marginEnd="@dimen/single_common_margin"

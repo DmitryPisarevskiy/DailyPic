@@ -9,14 +9,14 @@ import com.example.dailypic.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.navigation.NavigationView
 
-class TopNavigationDrawerFragment : BottomSheetDialogFragment() {
+class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.top_navigation_layout, container, false)
+        return inflater.inflate(R.layout.navigation_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

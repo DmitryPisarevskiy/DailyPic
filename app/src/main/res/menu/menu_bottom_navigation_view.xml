@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/app_bar_search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/search"
+        android:id="@+id/nav_earth"
+        android:icon="@drawable/ic_earth_svgrepo_com"
+        android:title="@string/earth"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/app_bar_fav"
-        android:icon="@drawable/ic_favourite_menu"
-        android:title="@string/favourite"
+        android:id="@+id/nav_planet"
+        android:icon="@drawable/ic_saturn_svgrepo_com"
+        android:title="@string/planets"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/app_bar_settings"
-        android:icon="@drawable/ic_settings_menu"
-        android:title="@string/settings"
+        android:id="@+id/nav_weather"
+        android:icon="@drawable/ic_bad_weather_svgrepo_com"
+        android:title="@string/weather"
         app:showAsAction="ifRoom" />
 </menu>

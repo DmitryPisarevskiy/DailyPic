@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/app_bar_search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/search" />
+
+        <item
+            android:id="@+id/app_bar_fav"
+            android:icon="@drawable/ic_favourite_menu"
+            android:title="@string/favourite" />
+
+        <item
+            android:id="@+id/app_bar_settings"
+            android:icon="@drawable/ic_settings_menu"
+            android:title="@string/settings" />
+    </group>
+</menu>

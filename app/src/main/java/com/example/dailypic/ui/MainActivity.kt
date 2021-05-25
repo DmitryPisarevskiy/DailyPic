@@ -22,17 +22,17 @@ class MainActivity : AppCompatActivity() {
         }
         vb.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.app_bar_search -> {
+                R.id.nav_weather -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, PictureFragment())
                         .commit()
                 }
-                R.id.app_bar_fav -> {
+                R.id.nav_earth -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, PictureFragment())
                         .commit()
                 }
-                R.id.app_bar_settings -> {
+                R.id.nav_planet -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, PictureFragment())
                         .commit()

@@ -18,4 +18,6 @@
     <string name="earth">Земля</string>
     <string name="planets">Планеты</string>
     <string name="weather">Погода</string>
+    <string name="mars">Марс</string>
+    <string name="picture_of_the_day">Фото дня</string>
 </resources>

@@ -9,14 +9,14 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/nav_planet"
-        android:icon="@drawable/ic_saturn_svgrepo_com"
-        android:title="@string/planets"
+        android:id="@+id/nav_mars"
+        android:icon="@drawable/ic_mars_with_satellite_svgrepo_com"
+        android:title="@string/mars"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/nav_weather"
-        android:icon="@drawable/ic_bad_weather_svgrepo_com"
-        android:title="@string/weather"
+        android:id="@+id/nav_picture"
+        android:icon="@drawable/ic_astronomy_svgrepo_com"
+        android:title="@string/picture_of_the_day"
         app:showAsAction="ifRoom" />
 </menu>

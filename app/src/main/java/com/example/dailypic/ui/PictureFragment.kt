@@ -52,32 +52,32 @@ class PictureFragment : Fragment() {
         setAppBar(view)
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.menu_top_navigation, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.app_bar_fav -> toast("Favourite")
-//            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
-//                ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
-//            android.R.id.home -> {
-//                activity?.let {
-//                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-//                }
-//            }
-//            R.id.app_bar_search -> {
-//                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-//                } else {
-//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-//                }
-//
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_top_navigation, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_fav -> toast("Favourite")
+            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                }
+            }
+            R.id.app_bar_search -> {
+                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                } else {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                }
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun renderData(data: PictureData) {
         when (data) {
@@ -144,6 +144,9 @@ class PictureFragment : Fragment() {
                 }
                 else -> false
             }
+        }
+        vb.fab.setOnClickListener {
+            vb.motionContainer.transitionToEnd()
         }
     }
 

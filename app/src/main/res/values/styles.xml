@@ -6,4 +6,7 @@
     <style name="LightChip" parent="@style/Widget.MaterialComponents.Chip.Choice">
         <item name="android:textColor">@color/color_black</item>
     </style>
+    <style name="BottomNavigation">
+        <item name="android:background">@color/design_default_color_primary_dark</item>
+    </style>
 </resources>

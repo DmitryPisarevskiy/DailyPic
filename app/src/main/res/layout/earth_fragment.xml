@@ -41,7 +41,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main"
+            android:id="@+id/motion_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="@dimen/single_common_padding"
@@ -85,15 +85,4 @@
     </androidx.core.widget.NestedScrollView>
 
     <include layout="@layout/bottom_sheet" />
-
-    <!--    <com.google.android.material.bottomappbar.BottomAppBar-->
-    <!--        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"-->
-    <!--        android:id="@+id/bottom_app_bar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="bottom"-->
-    <!--        app:fabAlignmentMode="end"-->
-    <!--        app:hideOnScroll="true"-->
-    <!--        app:layout_scrollFlags="scroll|enterAlways"-->
-    <!--        app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

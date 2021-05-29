@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,15 +8,20 @@
 
 
     <TextView
+        android:id="@+id/tv_theme_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/single_common_margin"
         android:text="@string/choose_theme"
         android:textSize="@dimen/large_text_size" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group"
-        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_theme_choice"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:singleSelection="true">
 
@@ -66,4 +71,4 @@
 
     </com.google.android.material.chip.ChipGroup>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

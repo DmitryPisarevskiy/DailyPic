@@ -20,7 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class PictureFragment : Fragment() {
+class EarthFragment : Fragment() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private val viewModel: PictureViewModel by lazy {
@@ -90,7 +90,7 @@ class PictureFragment : Fragment() {
                 } else {
                     //showSuccess()
                     view!!.findViewById<ImageView>(R.id.top_picture).load(url) {
-                        lifecycle(this@PictureFragment)
+                        lifecycle(this@EarthFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_foreground)
                     }

@@ -4,17 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="@dimen/bottom_sheet_height"
     android:background="#f6f6fa"
     app:behavior_hideable="true"
-    app:behavior_peekHeight="0dp"
+    app:behavior_peekHeight="@dimen/peek_height"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <View
         android:id="@+id/bottom_sheet_line_2"
-        android:layout_width="25dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="@dimen/bottom_sheet_line_width"
+        android:layout_height="@dimen/line_height"
+        android:layout_marginTop="@dimen/single_common_margin"
         android:background="#663b4351"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,12 +2,14 @@ package com.example.dailypic.ui
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -112,6 +114,7 @@ class PictureFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun setAppBar() {
         val context = activity as MainActivity
         context.setSupportActionBar(vb.topToolbar)
@@ -151,6 +154,7 @@ class PictureFragment : Fragment() {
             if (wikiIsShown) {
                 vb.motionContainer.transitionToStart()
                 vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_wikipedia_svgrepo_com))
+                vb.fab.animate().translationXBy(10f)
                 wikiIsShown = false
             } else {
                 vb.motionContainer.transitionToEnd()
@@ -158,6 +162,9 @@ class PictureFragment : Fragment() {
                 wikiIsShown = true
             }
 
+        }
+        vb.scrollView.setOnScrollChangeListener { _, _, _, _, _ ->
+            vb.topToolbar.isSelected = vb.scrollView.canScrollVertically(-1)
         }
     }
 

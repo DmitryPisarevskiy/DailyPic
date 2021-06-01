@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import coil.api.load
 import com.example.dailypic.R
@@ -26,7 +27,8 @@ class PictureFragment : Fragment() {
     private val viewModel: PictureViewModel by lazy {
         ViewModelProvider(this).get(PictureViewModel::class.java)
     }
-    lateinit var vb: PictureFragmentBinding
+    private var wikiIsShown: Boolean = false
+    private lateinit var vb: PictureFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +40,7 @@ class PictureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getData()
-            .observe(viewLifecycleOwner, Observer<PictureData> { renderData(it) })
+            .observe(viewLifecycleOwner, { renderData(it) })
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         view.findViewById<TextInputLayout>(R.id.input_layout).setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -49,35 +51,35 @@ class PictureFragment : Fragment() {
                 )
             })
         }
-        setAppBar(view)
+        setAppBar()
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.menu_top_navigation, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.app_bar_fav -> toast("Favourite")
-//            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
-//                ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
-//            android.R.id.home -> {
-//                activity?.let {
-//                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-//                }
-//            }
-//            R.id.app_bar_search -> {
-//                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-//                } else {
-//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-//                }
-//
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_top_navigation, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_fav -> toast("Favourite")
+            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                }
+            }
+            R.id.app_bar_search -> {
+                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                } else {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                }
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun renderData(data: PictureData) {
         when (data) {
@@ -110,17 +112,17 @@ class PictureFragment : Fragment() {
         }
     }
 
-    private fun setAppBar(view: View) {
+    private fun setAppBar() {
         val context = activity as MainActivity
-        context.setSupportActionBar(vb.topAppBar)
-        context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
+        context.setSupportActionBar(vb.topToolbar)
+        context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
-        vb.topAppBar.setNavigationOnClickListener {
+        vb.topToolbar.setNavigationOnClickListener {
             activity?.let {
                 BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
             }
         }
-        vb.topAppBar.setOnMenuItemClickListener {
+        vb.topToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_bar_fav -> {
                     toast("Favourite")
@@ -144,6 +146,18 @@ class PictureFragment : Fragment() {
                 }
                 else -> false
             }
+        }
+        vb.fab.setOnClickListener {
+            if (wikiIsShown) {
+                vb.motionContainer.transitionToStart()
+                vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_wikipedia_svgrepo_com))
+                wikiIsShown = false
+            } else {
+                vb.motionContainer.transitionToEnd()
+                vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
+                wikiIsShown = true
+            }
+
         }
     }
 

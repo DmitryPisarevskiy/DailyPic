@@ -38,7 +38,7 @@ class EarthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getData()
-            .observe(viewLifecycleOwner, Observer<PictureData> { renderData(it) })
+            .observe(viewLifecycleOwner, { renderData(it) })
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         view.findViewById<TextInputLayout>(R.id.input_layout).setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -49,7 +49,7 @@ class EarthFragment : Fragment() {
                 )
             })
         }
-        setAppBar(view)
+        setAppBar()
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -110,17 +110,17 @@ class EarthFragment : Fragment() {
         }
     }
 
-    private fun setAppBar(view: View) {
+    private fun setAppBar() {
         val context = activity as MainActivity
-        context.setSupportActionBar(vb.topAppBar)
-        context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
+        context.setSupportActionBar(vb.topToolbar)
+        context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
-        vb.topAppBar.setNavigationOnClickListener {
+        vb.topToolbar.setNavigationOnClickListener {
             activity?.let {
                 BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
             }
         }
-        vb.topAppBar.setOnMenuItemClickListener {
+        vb.topToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_bar_fav -> {
                     toast("Favourite")

@@ -8,6 +8,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
+        android:id="@+id/app_bar"
         android:layout_height="@dimen/topbar_height"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:fitsSystemWindows="true">
@@ -28,11 +29,12 @@
                 style="@style/Widget.MaterialComponents.Toolbar.Surface"
                 android:id="@+id/top_toolbar"
                 android:layout_width="match_parent"
+                app:layout_collapseMode="pin"
                 app:menu="@menu/menu_top_navigation"
                 android:layout_height="?attr/actionBarSize"
                 app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar"
                 android:background="@android:color/transparent"
-                />
+                android:stateListAnimator="@xml/toolbar_animation"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

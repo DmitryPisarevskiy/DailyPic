@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_mars -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, PictureFragment())
+                        .replace(R.id.container, MarsFragment())
                         .commit()
                 }
                 R.id.nav_picture -> {

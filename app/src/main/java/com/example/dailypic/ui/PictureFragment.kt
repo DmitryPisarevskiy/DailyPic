@@ -1,16 +1,20 @@
 package com.example.dailypic.ui
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.Observer
 import coil.api.load
 import com.example.dailypic.R
@@ -148,16 +152,35 @@ class PictureFragment : Fragment() {
             }
         }
         vb.fab.setOnClickListener {
+            val deltaVertical = vb.inputLayout.height.toFloat()
             if (wikiIsShown) {
-                vb.motionContainer.transitionToStart()
+                vb.inputLayout.animate().translationYBy(-deltaVertical)
+                vb.bottomSheetLine2.animate().translationYBy(-deltaVertical)
+                vb.bottomSheetDescriptionHeader.animate().translationYBy(-deltaVertical)
+                vb.bottomSheetDescription.animate().translationYBy(-deltaVertical)
+//                vb.motionContainer.transitionToStart()
                 vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_wikipedia_svgrepo_com))
+                vb.fab.animate()
+                    .rotationBy(360f)
+                    .setDuration(200).setInterpolator(FastOutSlowInInterpolator())
                 wikiIsShown = false
             } else {
-                vb.motionContainer.transitionToEnd()
+                vb.inputLayout.animate().translationYBy(deltaVertical)
+                vb.bottomSheetLine2.animate().translationYBy(deltaVertical)
+                vb.bottomSheetDescriptionHeader.animate().translationYBy(deltaVertical)
+                vb.bottomSheetDescription.animate().translationYBy(deltaVertical)
+//                vb.motionContainer.transitionToEnd()
                 vb.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
+                ObjectAnimator.ofFloat(vb.fab, "rotation",360f,0f).start()
                 wikiIsShown = true
             }
 
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            vb.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                vb.topToolbar.isSelected = vb.scrollView.canScrollVertically(-1)
+                vb.fab.isSelected = vb.scrollView.canScrollVertically(-1)
+            }
         }
     }
 

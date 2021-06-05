@@ -9,4 +9,5 @@
     <dimen name="large_text_size">18sp</dimen>
     <dimen name="topbar_height">400dp</dimen>
     <dimen name="single_common_padding">10dp</dimen>
+    <dimen name="rv_item_padding">3dp</dimen>
 </resources>

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.api.load
 import com.example.dailypic.R
@@ -26,6 +27,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 class MarsFragment : Fragment() {
 
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private val viewModel: MarsViewModel by lazy {
         ViewModelProvider(this).get(MarsViewModel::class.java)
     }
@@ -43,35 +45,35 @@ class MarsFragment : Fragment() {
         viewModel.getData()
             .observe(viewLifecycleOwner, { renderData(it) })
         setAppBar()
-        vb.rvMarsPhotos.layoutManager = LinearLayoutManager(getContext())
+        vb.rvMarsPhotos.layoutManager = GridLayoutManager(getContext(),4)
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.menu_top_navigation, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.app_bar_fav -> toast("Favourite")
-//            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
-//                ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
-//            android.R.id.home -> {
-//                activity?.let {
-//                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-//                }
-//            }
-//            R.id.app_bar_search -> {
-//                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-//                } else {
-//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-//                }
-//
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_top_navigation, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_fav -> toast("Favourite")
+            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                }
+            }
+            R.id.app_bar_search -> {
+                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                } else {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                }
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun renderData(data: MarsData) {
         when (data) {
@@ -79,26 +81,14 @@ class MarsFragment : Fragment() {
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.photos[0].imgSrc
                 if (url.isNullOrEmpty()) {
-                    //showError("Сообщение, что ссылка пустая")
                     toast("Link is empty")
                 } else {
-                    //showSuccess()
-                    view!!.findViewById<ImageView>(R.id.top_picture).load(url) {
-                        lifecycle(this@MarsFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_foreground)
-                    }
-//                    view!!.findViewById<TextView>(R.id.tv_description).text =
-//                        serverResponseData.photos[0].earthDate
-//                    view!!.findViewById<TextView>(R.id.tv_description_header).text =
-//                        serverResponseData.photos[0].camera.fullName
+                    vb.rvMarsPhotos.adapter = MarsAdapter(data.serverResponseData.photos)
                 }
             }
             is MarsData.Loading -> {
-                //showLoading()
             }
             is MarsData.Error -> {
-                //showError(data.error.message)
                 toast(data.error.message)
             }
         }

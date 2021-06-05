@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.api.load
 import com.example.dailypic.R
 import com.example.dailypic.databinding.MarsFragmentBinding
@@ -42,6 +43,7 @@ class MarsFragment : Fragment() {
         viewModel.getData()
             .observe(viewLifecycleOwner, { renderData(it) })
         setAppBar()
+        vb.rvMarsPhotos.layoutManager = LinearLayoutManager(getContext())
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -86,10 +88,10 @@ class MarsFragment : Fragment() {
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_foreground)
                     }
-                    view!!.findViewById<TextView>(R.id.bottom_sheet_description).text =
-                        serverResponseData.photos[0].earthDate
-                    view!!.findViewById<TextView>(R.id.bottom_sheet_description_header).text =
-                        serverResponseData.photos[0].camera.fullName
+//                    view!!.findViewById<TextView>(R.id.tv_description).text =
+//                        serverResponseData.photos[0].earthDate
+//                    view!!.findViewById<TextView>(R.id.tv_description_header).text =
+//                        serverResponseData.photos[0].camera.fullName
                 }
             }
             is MarsData.Loading -> {

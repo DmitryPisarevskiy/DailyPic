@@ -17,6 +17,7 @@ import coil.api.load
 import com.example.dailypic.R
 import com.example.dailypic.databinding.MarsFragmentBinding
 import com.example.dailypic.databinding.PictureFragmentBinding
+import com.example.dailypic.model.marsModel.Photo
 import com.example.dailypic.viewmodel.picture.MarsData
 import com.example.dailypic.viewmodel.picture.MarsViewModel
 import com.example.dailypic.viewmodel.picture.PictureData
@@ -25,7 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class MarsFragment : Fragment() {
+class MarsFragment : Fragment(),RVClickListener {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private val viewModel: MarsViewModel by lazy {
@@ -45,6 +46,7 @@ class MarsFragment : Fragment() {
         viewModel.getData()
             .observe(viewLifecycleOwner, { renderData(it) })
         setAppBar()
+        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         vb.rvMarsPhotos.layoutManager = GridLayoutManager(getContext(),4)
     }
 
@@ -63,14 +65,6 @@ class MarsFragment : Fragment() {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
                 }
             }
-            R.id.app_bar_search -> {
-                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                } else {
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                }
-
-            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -83,7 +77,7 @@ class MarsFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast("Link is empty")
                 } else {
-                    vb.rvMarsPhotos.adapter = MarsAdapter(data.serverResponseData.photos)
+                    vb.rvMarsPhotos.adapter = MarsAdapter(data.serverResponseData.photos, this)
                 }
             }
             is MarsData.Loading -> {
@@ -104,28 +98,12 @@ class MarsFragment : Fragment() {
                 BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
             }
         }
-        vb.topToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.app_bar_fav -> {
-                    toast("Favourite")
-                    true
-                }
-                R.id.app_bar_settings -> {
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .add(R.id.container, ChipsFragment())
-                        .addToBackStack(null)
-                        .commit()
-                    true
-                }
-                R.id.app_bar_search -> {
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
+    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+    }
 
     private fun Fragment.toast(string: String?) {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
@@ -134,8 +112,8 @@ class MarsFragment : Fragment() {
         }
     }
 
-    companion object {
-        fun newInstance() = PictureFragment()
-        private var isMain = true
+    override fun onClick(photo: Photo) {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
+
 }

@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/app_bar_search"
-            android:icon="@drawable/ic_search"
-            android:title="@string/search"
-            app:showAsAction="ifRoom"/>
-
-        <item
             android:id="@+id/app_bar_fav"
             android:icon="@drawable/ic_favourite_menu"
             android:title="@string/favourite"

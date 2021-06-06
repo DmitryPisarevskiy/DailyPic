@@ -10,7 +10,7 @@ import coil.api.load
 import com.example.dailypic.R
 import com.example.dailypic.model.marsModel.Photo
 
-class MarsAdapter(private val photos: List<Photo>) :
+class MarsAdapter(private val photos: List<Photo>, val listener: RVClickListener) :
     RecyclerView.Adapter<MarsAdapter.MarsViewHolder>() {
 
     class MarsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,6 +33,7 @@ class MarsAdapter(private val photos: List<Photo>) :
             error(R.drawable.ic_load_error_vector)
             placeholder(R.drawable.ic_no_photo_foreground)
         }
+        holder.picture.setOnClickListener { listener.onClick(photos[position]) }
     }
 
     override fun getItemCount(): Int {

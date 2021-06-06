@@ -37,15 +37,6 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                         .commit()
                     true
                 }
-                R.id.app_bar_search -> {
-//                TODO
-//                    if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-//                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-//                    } else {
-//                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-//                    }
-                    true
-                }
                 else -> false
             }
         }

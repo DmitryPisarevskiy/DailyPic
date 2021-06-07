@@ -4,6 +4,6 @@ import com.example.dailypic.model.marsModel.Photo
 import com.google.gson.annotations.SerializedName
 
 data class MarsServerResponseData(
-    @SerializedName("photos") val photos: List<Photo>
+    @SerializedName("photos") val photos: MutableList<Photo>
 )
 

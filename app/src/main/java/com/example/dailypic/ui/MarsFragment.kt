@@ -100,10 +100,9 @@ class MarsFragment : Fragment(), RVClickListener {
         }
     }
 
-    override fun onClick(photo: Photo) {
+    override fun onItemClick(photo: Photo) {
         activity?.let {
             BottomNavigationDrawerFragment(photo).show(it.supportFragmentManager, "tag")
         }
     }
-
 }

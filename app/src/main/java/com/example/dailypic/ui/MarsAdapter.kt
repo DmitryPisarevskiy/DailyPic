@@ -10,13 +10,14 @@ import coil.api.load
 import com.example.dailypic.R
 import com.example.dailypic.model.marsModel.Photo
 
-class MarsAdapter(private val photos: List<Photo>, val listener: RVClickListener) :
+class MarsAdapter(private val photos: MutableList<Photo>, val listener: RVClickListener) :
     RecyclerView.Adapter<MarsAdapter.MarsViewHolder>() {
 
     class MarsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var header: TextView = itemView.findViewById(R.id.tv_description_header)
-        var description: TextView = itemView.findViewById(R.id.tv_description)
-        var picture: ImageView = itemView.findViewById(R.id.img_mars)
+        val header: TextView = itemView.findViewById(R.id.tv_description_header)
+        val description: TextView = itemView.findViewById(R.id.tv_description)
+        val picture: ImageView = itemView.findViewById(R.id.img_mars)
+        val delete: ImageView = itemView.findViewById(R.id.img_mars_delete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarsViewHolder {
@@ -33,7 +34,11 @@ class MarsAdapter(private val photos: List<Photo>, val listener: RVClickListener
             error(R.drawable.ic_load_error_vector)
             placeholder(R.drawable.ic_no_photo_foreground)
         }
-        holder.picture.setOnClickListener { listener.onClick(photos[position]) }
+        holder.picture.setOnClickListener { listener.onItemClick(photos[position]) }
+        holder.delete.setOnClickListener {
+            photos.removeAt(position)
+            notifyDataSetChanged()
+        }
     }
 
     override fun getItemCount(): Int {

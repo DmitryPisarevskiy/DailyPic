@@ -15,8 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.navigation.NavigationView
 
-class BottomNavigationDrawerFragment(p: Photo) : BottomSheetDialogFragment() {
-    private val photo = p
+class BottomNavigationDrawerFragment(val photo: Photo) : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -29,13 +29,7 @@ class BottomNavigationDrawerFragment(p: Photo) : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<ImageView>(R.id.img_bottom_mars)?.load(photo.imgSrc)
-        view.findViewById<TextView>(R.id.tv_bottom_header)?.let {
-            it.text = photo.rover.name
-            it.animate().translationXBy(it.width.toFloat()).setDuration(500).start()
-        }
-        view.findViewById<TextView>(R.id.tv_bottom_description)?.let{
-            it.text = photo.camera.fullName
-            it.animate().translationYBy(-it.height.toFloat()).setDuration(500).start()
-        }
+        view.findViewById<TextView>(R.id.tv_bottom_header)?.text = photo.rover.name
+        view.findViewById<TextView>(R.id.tv_bottom_description)?.text = photo.camera.fullName
     }
 }

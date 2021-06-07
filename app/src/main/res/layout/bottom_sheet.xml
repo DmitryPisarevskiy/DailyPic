@@ -3,39 +3,38 @@
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/rv_item_padding"
+    android:padding="@dimen/bottom_sheet_padding"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_bottom_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="visible"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        tools:text="header"/>
 
     <ImageView
-        android:id="@+id/img_mars"
+        android:id="@+id/img_bottom_mars"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="@dimen/bottom_sheet_height"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_header"
         app:layout_constraintStart_toStartOf="parent"
         tools:src="@drawable/ic_load_error_vector"/>
 
     <TextView
-        android:id="@+id/tv_description_header"
+        android:id="@+id/tv_bottom_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        tools:text="header"/>
-
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/img_bottom_mars"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
+        android:background="?attr/colorAccent"
+        android:padding="@dimen/double_common_margin"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:text="description description description description "/>
 

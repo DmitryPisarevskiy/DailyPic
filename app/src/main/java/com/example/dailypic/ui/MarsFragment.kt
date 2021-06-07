@@ -26,7 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class MarsFragment : Fragment(),RVClickListener {
+class MarsFragment : Fragment(), RVClickListener {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private val viewModel: MarsViewModel by lazy {
@@ -46,8 +46,7 @@ class MarsFragment : Fragment(),RVClickListener {
         viewModel.getData()
             .observe(viewLifecycleOwner, { renderData(it) })
         setAppBar()
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
-        vb.rvMarsPhotos.layoutManager = GridLayoutManager(getContext(),4)
+        vb.rvMarsPhotos.layoutManager = GridLayoutManager(getContext(), 4)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -61,9 +60,6 @@ class MarsFragment : Fragment(),RVClickListener {
             R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
             android.R.id.home -> {
-                activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-                }
             }
         }
         return super.onOptionsItemSelected(item)
@@ -94,15 +90,7 @@ class MarsFragment : Fragment(),RVClickListener {
         context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
         vb.topToolbar.setNavigationOnClickListener {
-            activity?.let {
-                BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-            }
         }
-    }
-
-    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     private fun Fragment.toast(string: String?) {
@@ -113,7 +101,9 @@ class MarsFragment : Fragment(),RVClickListener {
     }
 
     override fun onClick(photo: Photo) {
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        activity?.let {
+            BottomNavigationDrawerFragment(photo).show(it.supportFragmentManager, "tag")
+        }
     }
 
 }

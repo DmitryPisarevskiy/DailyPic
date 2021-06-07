@@ -1,44 +1,41 @@
 package com.example.dailypic.ui
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import coil.api.load
 import com.example.dailypic.R
+import com.example.dailypic.model.marsModel.Photo
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.navigation.NavigationView
 
-class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
+class BottomNavigationDrawerFragment(p: Photo) : BottomSheetDialogFragment() {
+    private val photo = p
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.navigation_layout, container, false)
+        return inflater.inflate(R.layout.bottom_sheet, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<NavigationView>(R.id.navigation_view).setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.app_bar_fav -> {
-//                TODO
-//                    toast("Favourite")
-                    true
-                }
-                R.id.app_bar_settings -> {
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .add(R.id.container, ChipsFragment())
-                        .addToBackStack(null)
-                        .commit()
-                    true
-                }
-                else -> false
-            }
+        view.findViewById<ImageView>(R.id.img_bottom_mars)?.load(photo.imgSrc)
+        view.findViewById<TextView>(R.id.tv_bottom_header)?.let {
+            it.text = photo.rover.name
+            it.animate().translationXBy(it.width.toFloat()).setDuration(500).start()
+        }
+        view.findViewById<TextView>(R.id.tv_bottom_description)?.let{
+            it.text = photo.camera.fullName
+            it.animate().translationYBy(-it.height.toFloat()).setDuration(500).start()
         }
     }
 }

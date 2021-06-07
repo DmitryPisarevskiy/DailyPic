@@ -115,11 +115,6 @@ class EarthFragment : Fragment() {
         context.setSupportActionBar(vb.topToolbar)
         context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
-        vb.topToolbar.setNavigationOnClickListener {
-            activity?.let {
-                BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-            }
-        }
         vb.topToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_bar_fav -> {

@@ -67,9 +67,6 @@ class PictureFragment : Fragment() {
             R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
             android.R.id.home -> {
-                activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-                }
             }
         }
         return super.onOptionsItemSelected(item)
@@ -108,9 +105,6 @@ class PictureFragment : Fragment() {
         context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
         vb.topToolbar.setNavigationOnClickListener {
-            activity?.let {
-                BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-            }
         }
         vb.fab.setOnClickListener {
             val deltaVertical = vb.inputLayout.height.toFloat()

@@ -27,7 +27,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 class PictureFragment : Fragment() {
 
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private val viewModel: PictureViewModel by lazy {
         ViewModelProvider(this).get(PictureViewModel::class.java)
     }
@@ -45,7 +44,6 @@ class PictureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getData()
             .observe(viewLifecycleOwner, { renderData(it) })
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         view.findViewById<TextInputLayout>(R.id.input_layout).setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(
@@ -69,17 +67,6 @@ class PictureFragment : Fragment() {
             R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
             android.R.id.home -> {
-                activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-                }
-            }
-            R.id.app_bar_search -> {
-                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                } else {
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                }
-
             }
         }
         return super.onOptionsItemSelected(item)
@@ -91,10 +78,8 @@ class PictureFragment : Fragment() {
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
                 if (url.isNullOrEmpty()) {
-                    //showError("Сообщение, что ссылка пустая")
                     toast("Link is empty")
                 } else {
-                    //showSuccess()
                     view!!.findViewById<ImageView>(R.id.top_picture).load(url) {
                         lifecycle(this@PictureFragment)
                         error(R.drawable.ic_load_error_vector)
@@ -107,10 +92,8 @@ class PictureFragment : Fragment() {
                 }
             }
             is PictureData.Loading -> {
-                //showLoading()
             }
             is PictureData.Error -> {
-                //showError(data.error.message)
                 toast(data.error.message)
             }
         }
@@ -122,34 +105,6 @@ class PictureFragment : Fragment() {
         context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
         vb.topToolbar.setNavigationOnClickListener {
-            activity?.let {
-                BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-            }
-        }
-        vb.topToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.app_bar_fav -> {
-                    toast("Favourite")
-                    true
-                }
-                R.id.app_bar_settings -> {
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .add(R.id.container, ChipsFragment())
-                        .addToBackStack(null)
-                        .commit()
-                    true
-                }
-                R.id.app_bar_search -> {
-                    if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                    } else {
-                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    }
-                    true
-                }
-                else -> false
-            }
         }
         vb.fab.setOnClickListener {
             val deltaVertical = vb.inputLayout.height.toFloat()
@@ -184,11 +139,6 @@ class PictureFragment : Fragment() {
         }
     }
 
-
-    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-    }
 
     private fun Fragment.toast(string: String?) {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {

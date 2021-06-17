@@ -115,11 +115,6 @@ class EarthFragment : Fragment() {
         context.setSupportActionBar(vb.topToolbar)
         context.getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
-        vb.topToolbar.setNavigationOnClickListener {
-            activity?.let {
-                BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-            }
-        }
         vb.topToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_bar_fav -> {
@@ -132,14 +127,6 @@ class EarthFragment : Fragment() {
                         .add(R.id.container, ChipsFragment())
                         .addToBackStack(null)
                         .commit()
-                    true
-                }
-                R.id.app_bar_search -> {
-                    if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                    } else {
-                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    }
                     true
                 }
                 else -> false

@@ -3,10 +3,12 @@
     <dimen name="single_common_margin">8dp</dimen>
     <dimen name="double_common_margin">16dp</dimen>
     <dimen name="peek_height">0dp</dimen>
-    <dimen name="bottom_sheet_height">180dp</dimen>
+    <dimen name="bottom_sheet_height">400dp</dimen>
     <dimen name="line_height">1dp</dimen>
     <dimen name="bottom_sheet_line_width">25dp</dimen>
     <dimen name="large_text_size">18sp</dimen>
     <dimen name="topbar_height">400dp</dimen>
     <dimen name="single_common_padding">10dp</dimen>
+    <dimen name="rv_item_padding">3dp</dimen>
+    <dimen name="bottom_sheet_padding">5dp</dimen>
 </resources>

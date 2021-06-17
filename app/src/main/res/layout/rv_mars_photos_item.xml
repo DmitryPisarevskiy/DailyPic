@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/bottom_sheet_padding"
+    android:padding="@dimen/rv_item_padding"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/img_mars"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@drawable/ic_load_error_vector"/>
+
+    <ImageView
+        android:id="@+id/img_mars_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_baseline_delete_24"/>
+
     <TextView
-        android:id="@+id/tv_bottom_header"
+        android:id="@+id/tv_description_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceLarge"
         tools:text="header"/>
 
-    <ImageView
-        android:id="@+id/img_bottom_mars"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_sheet_height"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_header"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:src="@drawable/ic_load_error_vector"/>
-
     <TextView
-        android:id="@+id/tv_bottom_description"
+        android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/img_bottom_mars"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="?attr/colorAccent"
-        android:padding="@dimen/double_common_margin"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:text="description description description description "/>
 

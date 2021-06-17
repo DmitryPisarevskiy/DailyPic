@@ -64,7 +64,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/double_common_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
         android:contentDescription="@string/wiki_helper_text"
         style="@style/Widget.Design.FloatingActionButton"
         android:id="@+id/fab"
-        app:fabSize="mini"
+        app:fabSize="normal"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:backgroundTint="@color/color_light_gray"
@@ -141,7 +141,5 @@
         app:layout_anchorGravity="bottom|end"
         android:stateListAnimator="@xml/toolbar_animation"
         />
-
-    <include layout="@layout/bottom_sheet" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
